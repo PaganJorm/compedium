@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/compendium/static/css/main.abeece77.css",
+    "main.js": "/compendium/static/js/main.42791b29.js",
+    "static/js/787.059ce50f.chunk.js": "/compendium/static/js/787.059ce50f.chunk.js",
+    "index.html": "/compendium/index.html",
+    "main.abeece77.css.map": "/compendium/static/css/main.abeece77.css.map",
+    "main.42791b29.js.map": "/compendium/static/js/main.42791b29.js.map",
+    "787.059ce50f.chunk.js.map": "/compendium/static/js/787.059ce50f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abeece77.css",
+    "static/js/main.42791b29.js"
+  ]
+}
