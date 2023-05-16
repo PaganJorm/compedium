@@ -1,0 +1,14 @@
+{
+  "contents": [
+    {
+      "title": "Explosives Manual",
+      "description": "A manual about explosives",
+      "tag": "explosives"
+    },
+    {
+      "title": "Drugs book",
+      "description": "A book about drugs",
+      "tag": "drugs"
+    }
+  ]
+}
