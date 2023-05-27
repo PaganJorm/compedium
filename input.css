@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+	border: 1px solid whitesmoke;
+	padding: 5%;
+}
+
+.title {
+	margin-bottom: 5%;
+	text-decoration: underline;
+	text-underline-offset: 8px;
+	line-height: 180%;
+}
+
+@media (max-width: 768px) {
+	.desc {
+		font-size: xx-small;
+	}
+}

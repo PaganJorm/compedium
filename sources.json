@@ -1,0 +1,29 @@
+[
+	{
+		"title": "The Anarchist Cookbook",
+		"desc": "Old, outdated, imprecise and highly dangerous, good knowledge but I'd avoid testing any of it",
+		"link": "https://drugpolicy.org/sites/default/files/Psilocybin_Mushrooms_Fact_Sheet.pdf",
+		"tags": "weapons"
+	},
+
+	{
+		"title": "9mm Homemade gun, The Home GunSmith",
+		"desc": "A beauty, however worse than the newer 3d printed guns, easy to make, not tested",
+		"link": "http://thehomegunsmith.com/pdf/9mmPistol.pdf",
+		"tags": "weapons"
+	},
+
+	{
+		"title": "How to make an ak47",
+		"desc": "3d printed guns are cheaper and more reliable, this is only if you wanna LARP",
+		"link": "https://d3l1h3n4or6wo9.cloudfront.net/UGAR/product/undergroundak47buildmanual.pdf",
+		"tags": "weapons"
+	},
+
+	{
+		"title": "A Shoplifting guide",
+		"desc": "Shoplifting for dummies, short and simple",
+		"link": "https://www.docdroid.net/CiXRSEs/a-shoplifting-guide-docx",
+		"tags": "theft"
+	}
+]

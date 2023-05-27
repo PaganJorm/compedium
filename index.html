@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>~/Compendium</title>
+		<link href="/dist/output.css" rel="stylesheet" />
+		<script src="index.js"></script>
+	</head>
+
+	<body class="h-screen bg-[#0e1111]">
+		<div id="main" class="h-screen text-white text-xl font-tech">
+			<div id="topBar" class="flex flex-row m-10 items-center h-[10%]">
+				<div class="h-full flex align-middle w-[30%]">
+					<input
+						type="text"
+						name="search"
+						id="search"
+						placeholder="Search"
+						class="outline-none bg-[#232b2b] my-auto p-2 w-full"
+					/>
+				</div>
+
+				<div class="h-full flex align-middle w-[10%] mx-2">
+					<select
+						name="tags"
+						id="tags"
+						class="bg-[#232b2b] my-auto p-2 w-full"
+					>
+						<option value="aa">aaaa</option>
+					</select>
+				</div>
+
+				<div class="h-full flex align-middle w-[10%]">
+					<button class="text-center my-auto">Search</button>
+				</div>
+
+				<div class="h-full flex align-middle w-[10%]">
+					<button class="text-center my-auto">About</button>
+				</div>
+
+				<div
+					class="h-full flex align-middle w-[40%] items-center justify-center"
+				>
+					<h1 class="text-center my-auto">~/Compendium</h1>
+				</div>
+			</div>
+
+			<div
+				id="content"
+				class="grid grid-flow-row xl:grid-cols-5 gap-4 md:grid-cols-3 grid-cols-2 text-sm md:text-xl m-10 "
+			></div>
+		</div>
+	</body>
+</html>
