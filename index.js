@@ -34,7 +34,7 @@ function loadAll() {
 		let inner = document.createElement("div")
 
 		let title = document.createElement("h3")
-		
+
 		title.innerHTML = entry.title
 		title.className = "title"
 
@@ -68,6 +68,7 @@ function loadSearch() {
 		.trim()
 		.normalize("NFD")
 		.replace(/\p{Diacritic}/gu, "")
+
 	const searchTerms = searchText.split(" ")
 
 	for (let i = 0; i < items.length; i++) {
