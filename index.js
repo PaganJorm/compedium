@@ -1,110 +1,120 @@
-let items = []
-
-window.onload = async () => {
-	items = await fetchAll()
-
-	loadAll()
-
-	document.getElementById("search").addEventListener("input", loadSearch)
-}
-
-async function fetchAll() {
-	try {
-		const response = await fetch("sources.json")
-		const data = await response.json()
-		const jsonArray = Array.isArray(data) ? data : [data]
-		return jsonArray
-	} catch (error) {
-		console.error("Error:", error)
-		return [] // Return an empty array in case of an error
-	}
-}
-
-function loadAll() {
-	const content = document.getElementById("content")
-
-	for (let i = 0; i < items.length; i++) {
-		const entry = items[i]
-
-		let card = document.createElement("a")
-
-		card.href = entry.link
-		card.className = "card"
-
-		let inner = document.createElement("div")
-
-		let title = document.createElement("h3")
-
-		title.innerHTML = entry.title
-		title.className = "title"
-
-		inner.appendChild(title)
-
-		let desc = document.createElement("p")
-
-		desc.innerHTML = entry.desc
-		desc.className = "desc"
-
-		inner.appendChild(desc)
-
-		card.appendChild(inner)
-
-		content.appendChild(card)
-	}
-}
-
-function loadSearch() {
-	const content = document.getElementById("content")
-
-	while (content.firstChild) {
-		content.removeChild(content.lastChild)
+class Item {
+	constructor(title, desc, link, tag) {
+		this.title = title
+		this.desc = desc
+		this.link = link
+		this.tag = tag
 	}
 
-	const search = document.getElementById("search")
-
-	// ! Search method stolen from based.cooking
-	const searchText = search.value
-		.toLowerCase()
-		.trim()
-		.normalize("NFD")
-		.replace(/\p{Diacritic}/gu, "")
-
-	const searchTerms = searchText.split(" ")
-
-	for (let i = 0; i < items.length; i++) {
-		const entry = items[i]
-
-		const searchString = `${entry.title}`
+	matchesSearch(searchTerms) {
+		const searchString = `${this.title}`
 			.toLowerCase()
 			.normalize("NFD")
 			.replace(/\p{Diacritic}/gu, "")
 
-		const isMatch = searchTerms.every((term) => searchString.includes(term))
+		return searchTerms.every((term) => searchString.includes(term))
+	}
 
-		let card = document.createElement("a")
+	matchesTag(tag) {
+		return this.tag === tag
+	}
 
-		if (isMatch) {
-			card.href = entry.link
-			card.className = "card"
+	createCard() {
+		const card = document.createElement("a")
+		card.href = this.link
+		card.className = "card"
 
-			let inner = document.createElement("div")
+		const inner = document.createElement("div")
 
-			let title = document.createElement("h3")
+		const title = document.createElement("h3")
+		title.innerHTML = this.title
+		title.className = "title"
+		inner.appendChild(title)
 
-			title.innerHTML = entry.title
-			title.className = "title"
+		const desc = document.createElement("p")
+		desc.innerHTML = this.desc
+		inner.appendChild(desc)
 
-			inner.appendChild(title)
+		card.appendChild(inner)
 
-			let desc = document.createElement("p")
+		return card
+	}
+}
 
-			desc.innerHTML = entry.desc
+class App {
+	constructor() {
+		this.items = []
+		this.searchInput = document.getElementById("search")
+		this.tagSelector = document.getElementById("tag")
+		this.content = document.getElementById("content")
+	}
 
-			inner.appendChild(desc)
+	async init() {
+		this.items = await this.fetchAll()
+		this.loadAll()
+		this.searchInput.addEventListener("input", () => this.loadSearch())
+		this.tagSelector.addEventListener("change", () => this.loadSearch())
+	}
 
-			card.appendChild(inner)
+	async fetchAll() {
+		try {
+			const response = await fetch("sources.json")
+			const data = await response.json()
+			const jsonArray = Array.isArray(data) ? data : [data]
 
-			content.appendChild(card)
+			return jsonArray.map(
+				(itemData) =>
+					new Item(
+						itemData.title,
+						itemData.desc,
+						itemData.link,
+						itemData.tags
+					)
+			)
+		} catch (error) {
+			console.error("Error:", error)
+			return []
+		}
+	}
+
+	loadAll() {
+		for (let i = 0; i < this.items.length; i++) {
+			const card = this.items[i].createCard()
+			this.content.appendChild(card)
+		}
+	}
+
+	loadSearch() {
+		const searchText = this.searchInput.value
+			.toLowerCase()
+			.trim()
+			.normalize("NFD")
+			.replace(/\p{Diacritic}/gu, "")
+		const searchTerms = searchText.split(" ")
+
+		while (this.content.firstChild) {
+			this.content.removeChild(this.content.lastChild)
+		}
+
+		for (let i = 0; i < this.items.length; i++) {
+			const item = this.items[i]
+
+			let tag = this.tagSelector.value
+
+			if (item.matchesSearch(searchTerms)) {
+				if (tag !== "all") {
+					if (item.matchesTag(tag)) {
+						const card = item.createCard()
+						this.content.appendChild(card)
+					}
+				} else {
+					const card = item.createCard()
+					this.content.appendChild(card)
+				}
+			}
 		}
 	}
 }
+
+const app = new App()
+window.onload = () => app.init()
