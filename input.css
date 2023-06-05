@@ -16,6 +16,7 @@
 	line-height: 180%;
 }
 
+
 @media (max-width: 768px) {
 	.desc {
 		font-size: xx-small;

@@ -47,6 +47,12 @@ class App {
 		this.searchInput = document.getElementById("search")
 		this.tagSelector = document.getElementById("tag")
 		this.content = document.getElementById("content")
+		this.grid = document.createElement("div")
+
+		this.grid.id = "grid"
+		this.grid.className = "grid xl:grid-cols-5 gap-4 text-xl md:grid-cols-3 sm:grid-cols-2"
+		this.about = document.getElementById("about")
+		this.search = document.getElementById("searchBtn")
 	}
 
 	async init() {
@@ -54,6 +60,8 @@ class App {
 		this.loadAll()
 		this.searchInput.addEventListener("input", () => this.loadSearch())
 		this.tagSelector.addEventListener("change", () => this.loadSearch())
+		this.about.addEventListener("click", () => this.loadAbout())
+		this.search.addEventListener("click", () => this.loadSearch())
 	}
 
 	async fetchAll() {
@@ -80,8 +88,10 @@ class App {
 	loadAll() {
 		for (let i = 0; i < this.items.length; i++) {
 			const card = this.items[i].createCard()
-			this.content.appendChild(card)
+			this.grid.appendChild(card)
 		}
+
+		this.content.appendChild(this.grid)
 	}
 
 	loadSearch() {
@@ -96,6 +106,10 @@ class App {
 			this.content.removeChild(this.content.lastChild)
 		}
 
+		while (this.grid.firstChild) {
+			this.grid.removeChild(this.grid.lastChild)
+		}
+
 		for (let i = 0; i < this.items.length; i++) {
 			const item = this.items[i]
 
@@ -105,14 +119,35 @@ class App {
 				if (tag !== "all") {
 					if (item.matchesTag(tag)) {
 						const card = item.createCard()
-						this.content.appendChild(card)
+						this.grid.appendChild(card)
 					}
 				} else {
 					const card = item.createCard()
-					this.content.appendChild(card)
+					this.grid.appendChild(card)
 				}
 			}
 		}
+
+		this.content.appendChild(this.grid)
+	}
+
+	loadAbout() {
+		while (this.content.firstChild) {
+			this.content.removeChild(this.content.lastChild)
+		}
+
+		let about = document.createElement("div")
+
+		about.className = "md:mx-28 sm:mx-10 flex flex-col justify-center items-center h-full"
+
+		about.innerHTML = `
+			<h3 class="font-bold text-3xl mb-5 mt-5">Hallo there!</h3>
+			<p> This is a collection of pretty illegal stuff that I use as a sort of library, I'll try
+			to update it whenever I find more content, I keep backups of stuff that might go offline and I'll
+			just upload the pdf myself if that happens, enjoy.</p>
+		`
+
+		this.content.appendChild(about)			
 	}
 }
 

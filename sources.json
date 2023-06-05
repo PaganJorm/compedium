@@ -25,5 +25,12 @@
 		"desc": "Shoplifting for dummies, short and simple",
 		"link": "https://www.docdroid.net/CiXRSEs/a-shoplifting-guide-docx",
 		"tags": "theft"
+	}, 
+	
+	{
+		"title": "Hacking Guide",
+		"desc": "Old but neat",
+		"link": "https://ia804509.us.archive.org/25/items/TheBasicsOfHackingAndPenetrationTesting/The%20basics%20of%20hacking%20and%20penetration%20testing.pdf",
+		"tags": "hacking"
 	}
 ]
