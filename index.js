@@ -4,6 +4,10 @@ class Item {
 		this.desc = desc
 		this.link = link
 		this.tag = tag
+		this.isLinkOnline = false
+		this.checkLinkStatus()
+
+		console.log(this.isLinkOnline);
 	}
 
 	matchesSearch(searchTerms) {
@@ -38,6 +42,24 @@ class Item {
 		card.appendChild(inner)
 
 		return card
+	}
+
+	checkLinkStatus() {
+		const self = this; // Store the instance reference
+
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					self.isLinkOnline = true; // Update the link status to true
+				} else {
+					self.isLinkOnline = false; // Update the link status to false
+				}
+				// You can perform further actions here, such as updating the UI or triggering additional logic
+			}
+		};
+		xhr.open("GET", this.link, true);
+		xhr.send();
 	}
 }
 
